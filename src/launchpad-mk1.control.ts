@@ -10,9 +10,10 @@ global.init = function init() {
   let transport = host.createTransport()
   let mixer = host.createMixer()
   let docState = host.getDocumentState()
+  let arranger = host.createArranger()
 
   controller = new Controller(
-    app, trackBank, transport, mixer, docState
+    app, arranger, trackBank, transport, mixer, docState
   )
 
   host.getMidiInPort(0).setMidiCallback(controller.handleMidiEvent);
@@ -33,11 +34,9 @@ global.flush = function flush() {
 
   gridButtonsToRedraw.forEach(button => {
     midiOut.sendMidi(144, button.key, button.color)
-    button.ColorChanged()
   });
   headerButtonsToRedraw.forEach(button => {
     midiOut.sendMidi(176, button.key, button.color)
-    button.ColorChanged()
   })
   controller.notifyRedrawn()
 

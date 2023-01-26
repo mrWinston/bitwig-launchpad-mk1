@@ -1,7 +1,7 @@
 import { Button, ScrollButton } from "./buttons/button";
 import { PageSelectButton } from "./buttons/pageSelectButton";
-import { HeaderIndexToKey, HeaderKeyToIndex, MidiMessage } from "./midi";
-import { GlowPage } from "./page/glowPage";
+import { HeaderIndexToKey, HeaderKeyToIndex, KeyAndColor, MidiMessage } from "./midi";
+import { ArrangerPage } from "./page/arrangerPage";
 import { GridPage } from "./page/gridPage";
 import { MixerPage } from "./page/mixerPage";
 import { Page } from "./page/page";
@@ -15,6 +15,7 @@ export class Controller {
   private pages: Page[]
 
   private app: API.Application
+  private arranger: API.Arranger
   private trackBank: API.TrackBank
   private transport: API.Transport
   private mixer: API.Mixer
@@ -22,9 +23,10 @@ export class Controller {
 
   private redrawGrid: boolean = false
 
-  constructor(app: API.Application, trackBank: API.TrackBank, transport: API.Transport, mixer: API.Mixer, state: API.DocumentState) {
+  constructor(app: API.Application, arranger: API.Arranger, trackBank: API.TrackBank, transport: API.Transport, mixer: API.Mixer, state: API.DocumentState) {
 
     this.app = app
+    this.arranger = arranger
     this.trackBank = trackBank
     this.transport = transport
     this.mixer = mixer
@@ -41,7 +43,7 @@ export class Controller {
       new GridPage(this.trackBank, this.transport, this.mixer, this.state, this.app),
       new SettingsPage(this.app, this.transport),
       new MixerPage(this.app, this.trackBank),
-      new GlowPage(),
+      new ArrangerPage(this.app,this.arranger, this.transport),
     ]
 
     this.headerButtons = [
@@ -73,18 +75,28 @@ export class Controller {
     return this.pages[this.currentPageNumber.getRaw()]
   }
 
-  public getGridButtonsToRedraw = (): Button[] => {
+  public getGridButtonsToRedraw = (): KeyAndColor[] => {
     if (this.redrawGrid) {
-      return this.getCurrentPage().getAllButtons()
+      return this.getCurrentPage().getAllKeyAndColors()
     } else {
-      return this.getCurrentPage().getButtonsToRedraw()
+      return this.getCurrentPage().getKeyAndColorToRedraw()
     }
   }
 
-  public getHeaderButtonsToRedraw = (): Button[] => {
-    return this.headerButtons.filter((but: Button): boolean => {
-      return but.colorChanged
+  public getHeaderButtonsToRedraw = (): KeyAndColor[] => {
+    let out: KeyAndColor[] = new Array()
+
+    this.headerButtons.forEach((btn, i) => {
+      if (btn.colorChanged) {
+        out.push({
+          key: HeaderIndexToKey(i),
+          color: btn.currentColor,
+        })
+      }
     })
+
+    return out
+    
   }
 
   public notifyRedrawn = () => {

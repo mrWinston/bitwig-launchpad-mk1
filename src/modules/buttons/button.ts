@@ -2,19 +2,19 @@ import { Color, RandomEnum, ScrollDirection } from "../utils"
 
 export abstract class Button {
 
-  public color: Color
+  public currentColor: Color
   public colorChanged: boolean
   public key: number
 
   constructor(key: number) {
-    this.color = Color.OFF
+    this.currentColor = Color.OFF
     this.colorChanged = true
     this.key = key
   }
 
   public setColor(v: Color) {
-    if (this.color != v) {
-      this.color = v;
+    if (this.currentColor != v) {
+      this.currentColor = v;
       this.colorChanged = true
     }
   }
@@ -97,7 +97,7 @@ export class ColorGridButton extends Button {
 
   pressed(): void {
     this.setColor(RandomEnum(Color))
-    println(`Key: ${this.key} - Color: ${this.color}`)
+    println(`Key: ${this.key} - Color: ${this.currentColor}`)
   }
 
   // no need to do stuff on release

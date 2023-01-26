@@ -68,7 +68,7 @@ export function BitwigToLaunchpadColor(bitwigColor: API.ColorValue, flashing: bo
   let bwRed = bitwigColor.red()
   let bwGreen = bitwigColor.green()
 
-  return ConvertToLaunchpadColor( bwRed, bwGreen, flashing)
+  return ConvertToLaunchpadColor(bwRed, bwGreen, flashing)
 }
 
 export function ConvertToLaunchpadColor(red: number, green: number, flashing: boolean): number {

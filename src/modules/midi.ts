@@ -33,9 +33,14 @@ export class MidiMessage {
   }
 }
 
+export type KeyAndColor = {
+  key: number
+  color: number
+}
+
 export type GridCoordinate = {
-  col: number,
-  row: number,
+  col: number
+  row: number
 }
 
 // Convert an x-y (column-row) grid coordinate to the appropriate grid key number
@@ -43,8 +48,8 @@ export function GridCoordinateToKey(coord: GridCoordinate): number {
   return (16 * coord.row) + coord.col;
 }
 
-export function CoordToKey(c:number, r:number):number {
-  return GridCoordinateToKey({col: c, row: r})
+export function CoordToKey(c: number, r: number): number {
+  return GridCoordinateToKey({ col: c, row: r })
 }
 
 

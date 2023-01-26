@@ -1,6 +1,6 @@
 import { Button, DummyButton } from "../buttons/button";
 import { GRID_COLUMS, GRID_ROWS } from "../constants";
-import { GridCoordinateToKey, GridKeyToCoordinate, MidiMessage } from "../midi";
+import { CoordToKey, GridCoordinateToKey, GridKeyToCoordinate, KeyAndColor, MidiMessage } from "../midi";
 import { MatrixFilter } from "../utils";
 
 export abstract class Page {
@@ -27,18 +27,35 @@ export abstract class Page {
     msg.isPressed() ? button.pressed() : button.released()
   }
 
-  public getAllButtons = (): Button[] => {
-    let allButtons: Button[] = new Array()
-    this.buttons.forEach(val => {
-      allButtons.push(...val)
+  public getAllKeyAndColors = (): KeyAndColor[] => {
+    let all: KeyAndColor[] = new Array()
+    this.buttons.forEach((btnCol, c) => {
+      btnCol.forEach((btn, r) => {
+        all.push({
+          key: CoordToKey(c, r),
+          color: btn.onColor
+        })
+        btn.ColorChanged()
+      })
     })
-    return allButtons
+    return all
   }
-  public getButtonsToRedraw = (): Button[] => {
-    let buttonsToRedraw: Button[] = new Array()
-    buttonsToRedraw.push(...MatrixFilter(this.buttons, (but: Button): boolean => {
-      return but.colorChanged
-    }))
-    return buttonsToRedraw
+
+  public getKeyAndColorToRedraw = (): KeyAndColor[] => {
+    let all: KeyAndColor[] = new Array()
+
+    this.buttons.forEach((btnCol, c) => {
+      btnCol.forEach((btn, r) => {
+        if (btn.colorChanged) {
+          all.push({
+            key: CoordToKey(c, r),
+            color: btn.onColor
+          })
+          btn.ColorChanged()
+        }
+      })
+    })
+
+    return all
   }
 }
