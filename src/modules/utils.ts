@@ -45,11 +45,49 @@ export function MatrixForEach<T>(matrix: T[][], fn: (value: T, col: number, row:
   }
 }
 
+/**
+ * Convert an {@link API.ColorValue} to a color value usable by the
+ * launchpad mk1. The function discards the Blue component of the Color as
+ * Launchpad only has green and blue LEDs.
+ * For reference, the number returned follows the following format bitwise
+ * format (Most Significant Bit First):
+ * * 6    -> Always 0
+ * * 5,4  -> Green Component
+ * * 3    -> Clear-Bit
+ * * 2    -> Copy-Bit ( Set to 0 to enable flashing )
+ * * 1,0  -> Red Component
+ *
+ * @param bitwigColor The Color that should be converted
+ * @param flashing Weather or not Flashing should be enabled on the launchpad
+ * for this color
+ *
+ * @returns The closest color value the launchpad supports.
+*/
+export function BitwigToLaunchpadColor(bitwigColor: API.ColorValue, flashing: boolean): number {
+  // TODO: Make sure that red() and green() return 0...1 value and not 0...255
+  let bwRed = bitwigColor.red()
+  let bwGreen = bitwigColor.green()
+
+  return ConvertToLaunchpadColor( bwRed, bwGreen, flashing)
+}
+
+export function ConvertToLaunchpadColor(red: number, green: number, flashing: boolean): number {
+
+  let lpRed = Math.round(red * 3) // launchpad values can be [0...3]
+  let lpGreen = Math.round(green * 3)
+
+  let flags = flashing ? 8 : 12 // Unset COPY Bit when Flashing required
+
+  return (16 * lpGreen) + lpRed + flags
+}
+
+
+
 export function MatrixFilter<T>(matrix: T[][], fn: (value: T, col: number, row: number, matrix: T[][]) => boolean): T[] {
   let out: T[] = new Array()
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      if(fn(matrix[i][j], i, j, matrix)) {
+      if (fn(matrix[i][j], i, j, matrix)) {
         out.push(matrix[i][j])
       }
     }

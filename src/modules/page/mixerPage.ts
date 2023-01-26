@@ -1,4 +1,5 @@
 import { GenericIncreaseDecreaseButton, GenericToggleButton } from "../buttons/button";
+import { TrackColoredMuteButton } from "../buttons/muteButton";
 import { CoordToKey } from "../midi";
 import { Color } from "../utils";
 import { Page } from "./page";
@@ -65,6 +66,10 @@ export class MixerPage extends Page {
 
       this.buttons[t][6] = new GenericToggleButton(
         CoordToKey(t, 6), (track.solo() as API.SettableBooleanValue), Color.YELLOW_FULL, Color.AMBER_LOW
+      )
+
+      this.buttons[t][7] = new TrackColoredMuteButton(
+        CoordToKey(t, 7), track
       )
     }
   }

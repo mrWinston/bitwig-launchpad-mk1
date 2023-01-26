@@ -33,8 +33,13 @@ export class GridPage extends Page {
         this.buttons[t][s] = but
       }
 
-      this.buttons[t][TOTAL_SCENES] = new StopButton(GridCoordinateToKey({ col: t, row: TOTAL_SCENES }), track)
-      this.buttons[t][TOTAL_SCENES + 1] = new ArmButton(GridCoordinateToKey({ col: t, row: TOTAL_SCENES + 1 }), track.arm())
+      this.buttons[t][TOTAL_SCENES] = new GenericToggleButton(
+        CoordToKey(t, TOTAL_SCENES), 
+        track.arm(), 
+        Color.RED_FULL, 
+        Color.RED_LOW
+      )
+      this.buttons[t][TOTAL_SCENES + 1] = new StopButton(CoordToKey(t, TOTAL_SCENES + 1), track)
 
       clipLauncher.addPlaybackStateObserver(this.createClipLauncherPlaybackStateObserver(t))
     }
