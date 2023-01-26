@@ -1,7 +1,6 @@
 import { Button, DummyButton } from "../buttons/button";
 import { GRID_COLUMS, GRID_ROWS } from "../constants";
 import { CoordToKey, GridCoordinateToKey, GridKeyToCoordinate, KeyAndColor, MidiMessage } from "../midi";
-import { MatrixFilter } from "../utils";
 
 export abstract class Page {
   buttons: Button[][];
@@ -33,7 +32,7 @@ export abstract class Page {
       btnCol.forEach((btn, r) => {
         all.push({
           key: CoordToKey(c, r),
-          color: btn.onColor
+          color: btn.currentColor
         })
         btn.ColorChanged()
       })
@@ -49,7 +48,7 @@ export abstract class Page {
         if (btn.colorChanged) {
           all.push({
             key: CoordToKey(c, r),
-            color: btn.onColor
+            color: btn.currentColor
           })
           btn.ColorChanged()
         }

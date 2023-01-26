@@ -80,7 +80,7 @@ export class GridButton extends Button {
           break;
       }
     }
-    println(`[UpdateColor] Slot ${this.key}: Color is now ${this.color}`)
+    println(`[UpdateColor] Slot ${this.key}: Color is now ${this.currentColor}`)
   }
 
   pressed(): void {
