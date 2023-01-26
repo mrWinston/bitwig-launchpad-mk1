@@ -18,6 +18,8 @@ export class TrackColoredMuteButton extends Button {
       this.updateColor()
     })
 
+    this.onColor = ConvertToLaunchpadColor(this.track.color().red(), this.track.color().green(), false)
+
     this.track.mute().addValueObserver((isMuted: boolean) => {
       this.isMuted = isMuted
       this.updateColor()

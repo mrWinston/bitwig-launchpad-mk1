@@ -20,6 +20,9 @@ export class StopButton extends Button {
       this.updateColor()
     })
 
+    this.standbyColor = ConvertToLaunchpadColor(this.track.color().red(), this.track.color().green(), false)
+    this.flashingColor = ConvertToLaunchpadColor(this.track.color().red(), this.track.color().green(), true)
+
     this.track.isQueuedForStop().addValueObserver((isQueued: boolean) => {
       this.isQueuedForStop = isQueued
       this.updateColor()
