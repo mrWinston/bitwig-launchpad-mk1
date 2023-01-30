@@ -10,8 +10,8 @@ export class GenericToggleEnumButton extends Button {
   offColor: Color
 
 
-  constructor(key: number, enumParameter: API.SettableEnumValue, onValue: string, offValue: string, onColor: Color, offColor: Color) {
-    super(key)
+  constructor(enumParameter: API.SettableEnumValue, onValue: string, offValue: string, onColor: Color, offColor: Color) {
+    super()
     this.enumParameter = enumParameter
     this.onValue = onValue
     this.offValue = offValue
@@ -36,8 +36,8 @@ export class GenericSetBeatTimeValueButton extends Button {
   quarterNotesPerBar: number
   value: number
 
-  constructor(key: number, observe: API.SettableBeatTimeValue, timeSignature: API.TimeSignatureValue, value: number, onColor: Color, offColor: Color) {
-    super(key)
+  constructor(observe: API.SettableBeatTimeValue, timeSignature: API.TimeSignatureValue, value: number, onColor: Color, offColor: Color) {
+    super()
 
     this.observe = observe
     this.value = value

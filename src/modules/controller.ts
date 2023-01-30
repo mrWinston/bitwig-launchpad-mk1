@@ -47,14 +47,14 @@ export class Controller {
     ]
 
     this.headerButtons = [
-      new ScrollButton(HeaderIndexToKey(0), ScrollDirection.UP, trackBank),
-      new ScrollButton(HeaderIndexToKey(1), ScrollDirection.DOWN, trackBank),
-      new ScrollButton(HeaderIndexToKey(2), ScrollDirection.LEFT, trackBank),
-      new ScrollButton(HeaderIndexToKey(3), ScrollDirection.RIGHT, trackBank),
-      new PageSelectButton(HeaderIndexToKey(4), 0, this.currentPageNumber),
-      new PageSelectButton(HeaderIndexToKey(5), 1, this.currentPageNumber),
-      new PageSelectButton(HeaderIndexToKey(6), 2, this.currentPageNumber),
-      new PageSelectButton(HeaderIndexToKey(7), 3, this.currentPageNumber),
+      new ScrollButton(ScrollDirection.UP, trackBank),
+      new ScrollButton(ScrollDirection.DOWN, trackBank),
+      new ScrollButton(ScrollDirection.LEFT, trackBank),
+      new ScrollButton(ScrollDirection.RIGHT, trackBank),
+      new PageSelectButton(0, this.currentPageNumber),
+      new PageSelectButton(1, this.currentPageNumber),
+      new PageSelectButton(2, this.currentPageNumber),
+      new PageSelectButton(3, this.currentPageNumber),
     ]
   }
 

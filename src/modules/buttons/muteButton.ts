@@ -9,8 +9,8 @@ export class TrackColoredMuteButton extends Button {
 
   isMuted: boolean = false
   
-  constructor(key: number, track: API.Track){
-    super(key)
+  constructor(track: API.Track){
+    super()
     this.track = track
 
     this.track.color().addValueObserver((red: number, green: number) => {

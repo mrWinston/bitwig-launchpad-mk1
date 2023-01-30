@@ -8,8 +8,8 @@ export class PageSelectButton extends Button {
   myNumber: number
   pageNumber: API.SettableRangedValue
 
-  constructor(key: number, myNumber: number, pageNumber: API.SettableRangedValue) {
-    super(key)
+  constructor(myNumber: number, pageNumber: API.SettableRangedValue) {
+    super()
     this.myNumber = myNumber
     this.pageNumber = pageNumber
 

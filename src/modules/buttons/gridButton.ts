@@ -20,14 +20,13 @@ export class GridButton extends Button {
   isEmpty: boolean
 
   constructor(
-    key: number,
     slot: API.ClipLauncherSlot,
     app: API.Application,
     arm: API.SettableBooleanValue,
     deleteActive: API.SettableBooleanValue,
     copyActive: API.SettableBooleanValue,
   ) {
-    super(key)
+    super()
     this.slot = slot
     this.app = app
     this.playbackState = PlaybackState.STOPPED
@@ -80,7 +79,6 @@ export class GridButton extends Button {
           break;
       }
     }
-    println(`[UpdateColor] Slot ${this.key}: Color is now ${this.currentColor}`)
   }
 
   pressed(): void {

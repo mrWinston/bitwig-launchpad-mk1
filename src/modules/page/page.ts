@@ -1,6 +1,6 @@
 import { Button, DummyButton } from "../buttons/button";
 import { GRID_COLUMS, GRID_ROWS } from "../constants";
-import { CoordToKey, GridCoordinateToKey, GridKeyToCoordinate, KeyAndColor, MidiMessage } from "../midi";
+import { CoordToKey, GridKeyToCoordinate, KeyAndColor, MidiMessage } from "../midi";
 
 export abstract class Page {
   buttons: Button[][];
@@ -12,7 +12,7 @@ export abstract class Page {
     for (let col = 0; col < this.buttons.length; col++) {
       this.buttons[col] = new Array(GRID_ROWS)
       for (let row = 0; row < this.buttons[col].length; row++) {
-        this.buttons[col][row] = new DummyButton(GridCoordinateToKey({ col: col, row: row }))
+        this.buttons[col][row] = new DummyButton()
       }
     }
 

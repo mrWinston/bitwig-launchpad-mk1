@@ -1,5 +1,5 @@
 import { ColorGridButton } from "../buttons/button";
-import { GridCoordinateToKey, GridKeyToCoordinate, MidiMessage } from "../midi";
+import { GridKeyToCoordinate, MidiMessage } from "../midi";
 import { Page } from "./page";
 
 export class GlowPage extends Page {
@@ -9,7 +9,7 @@ export class GlowPage extends Page {
 
     for (let i = 0; i < this.buttons.length; i++) {
       for (let j = 0; j < this.buttons[i].length; j++) {
-        this.buttons[i][j] = new ColorGridButton(GridCoordinateToKey({ col: i, row: j }))
+        this.buttons[i][j] = new ColorGridButton()
       }
     }
   }

@@ -4,12 +4,10 @@ export abstract class Button {
 
   public currentColor: Color
   public colorChanged: boolean
-  public key: number
 
-  constructor(key: number) {
+  constructor() {
     this.currentColor = Color.OFF
     this.colorChanged = true
-    this.key = key
   }
 
   public setColor(v: Color) {
@@ -35,8 +33,8 @@ export class ScrollButton extends Button {
   trackBank: API.TrackBank
 
 
-  constructor(key: number, direction: ScrollDirection, trackBank: API.TrackBank) {
-    super(key)
+  constructor(direction: ScrollDirection, trackBank: API.TrackBank) {
+    super()
     this.setColor(Color.AMBER_LOW)
     this.trackBank = trackBank
     this.direction = direction
@@ -90,14 +88,13 @@ export class ScrollButton extends Button {
 
 export class ColorGridButton extends Button {
 
-  constructor(key: number) {
-    super(key)
+  constructor() {
+    super()
     this.setColor(Color.OFF)
   }
 
   pressed(): void {
     this.setColor(RandomEnum(Color))
-    println(`Key: ${this.key} - Color: ${this.currentColor}`)
   }
 
   // no need to do stuff on release
@@ -111,8 +108,8 @@ export class GenericSetEnumButton extends Button {
   onColor: Color
   offColor: Color
 
-  constructor(key: number, enumParameter: API.SettableEnumValue, setValue: string,  onColor: Color, offColor: Color) {
-    super(key)
+  constructor(enumParameter: API.SettableEnumValue, setValue: string,  onColor: Color, offColor: Color) {
+    super()
     this.enumParameter = enumParameter
     this.setValue = setValue
     this.onColor = onColor
@@ -136,8 +133,8 @@ export class GenericToggleButton extends Button {
   onColor: Color
   offColor: Color
 
-  constructor(key: number, toggle: API.SettableBooleanValue, onColor: Color, offColor: Color) {
-    super(key)
+  constructor(toggle: API.SettableBooleanValue, onColor: Color, offColor: Color) {
+    super()
     this.toggle = toggle
     this.onColor = onColor
     this.offColor = offColor
@@ -162,8 +159,8 @@ export class GenericMomentaryButton extends Button {
   offColor: Color
   pressedState: boolean
 
-  constructor(key: number, toggle: API.SettableBooleanValue, onColor: Color, offColor: Color, pressedState: boolean) {
-    super(key)
+  constructor(toggle: API.SettableBooleanValue, onColor: Color, offColor: Color, pressedState: boolean) {
+    super()
     this.toggle = toggle
     this.onColor = onColor
     this.offColor = offColor
@@ -191,8 +188,8 @@ export class GenericIncreaseDecreaseButton extends Button {
 
   increment: number
 
-  constructor(key: number, parameter: API.Parameter, increment: number, onColor: Color, offColor: Color) {
-    super(key)
+  constructor(parameter: API.Parameter, increment: number, onColor: Color, offColor: Color) {
+    super()
     this.parameter = parameter
     this.parameter.markInterested()
     this.onColor = onColor
@@ -217,8 +214,8 @@ export class GenericActionButton extends Button {
   onColor: Color
   offColor: Color
 
-  constructor(key: number, action: () => void, onColor: Color, offColor: Color) {
-    super(key)
+  constructor(action: () => void, onColor: Color, offColor: Color) {
+    super()
     this.action = action
     this.onColor = onColor
     this.offColor = offColor
@@ -237,8 +234,8 @@ export class GenericActionButton extends Button {
 
 export class DummyButton extends Button {
 
-  constructor(key: number) {
-    super(key)
+  constructor() {
+    super()
   }
 
   // dont do anything

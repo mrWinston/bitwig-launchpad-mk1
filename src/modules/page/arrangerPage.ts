@@ -1,3 +1,5 @@
+import { GenericActionButton, GenericToggleButton } from "../buttons/button";
+import { Color } from "../utils";
 import { Page } from "./page";
 
 /**
@@ -31,6 +33,15 @@ export class ArrangerPage extends Page {
     this.app = app
     this.arranger = arranger
     this.transport = transport
+
+
+    // play section
+    
+    this.buttons[4][7] = new GenericActionButton(this.transport.rewind, Color.AMBER_FULL, Color.AMBER_LOW)
+    this.buttons[5][7] = new GenericToggleButton(this.transport.isPlaying(), Color.GREEN_FLASHING, Color.GREEN_LOW)
+    this.buttons[6][7] = new GenericToggleButton(this.transport.isArrangerRecordEnabled() ,Color.RED_FLASHING, Color.RED_LOW)
+    this.buttons[7][6] = new GenericToggleButton(this.transport.isArrangerAutomationWriteEnabled() ,Color.ORANGE_FLASHING, Color.YELLOW_LOW)
+    this.buttons[6][6] = new GenericToggleButton(this.transport.isArrangerOverdubEnabled() ,Color.ORANGE_FLASHING, Color.AMBER_LOW)
 
   }
 }

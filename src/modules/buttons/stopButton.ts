@@ -1,4 +1,4 @@
-import { Color, ConvertToLaunchpadColor } from "../utils";
+import { ConvertToLaunchpadColor } from "../utils";
 import { Button } from "./button";
 
 export class StopButton extends Button {
@@ -10,8 +10,8 @@ export class StopButton extends Button {
   isStopped: boolean = true
   isQueuedForStop: boolean = false
   
-  constructor(key: number, track: API.Track){
-    super(key)
+  constructor(track: API.Track){
+    super()
     this.track = track
 
     this.track.color().addValueObserver((red: number, green: number) => {
