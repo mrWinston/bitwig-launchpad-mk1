@@ -63,7 +63,7 @@ export class GridPage extends Page {
       ),
       new GenericToggleButton(
         CoordToKey(t, 1),
-        this.transport.isArrangerRecordEnabled(),
+        this.transport.isClipLauncherOverdubEnabled(),
         Color.RED_FLASHING, Color.RED_LOW
       ),
       new GenericActionButton(
