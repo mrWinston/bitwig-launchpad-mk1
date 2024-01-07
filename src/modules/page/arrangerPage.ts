@@ -1,4 +1,5 @@
 import { GenericActionButton, GenericToggleButton } from "../buttons/button";
+import { MovePlaybackButton } from "../buttons/moveButton";
 import { Color } from "../utils";
 import { Page } from "./page";
 
@@ -37,11 +38,24 @@ export class ArrangerPage extends Page {
 
     // play section
     
-    this.buttons[4][7] = new GenericActionButton(this.transport.rewind, Color.AMBER_FULL, Color.AMBER_LOW)
-    this.buttons[5][7] = new GenericToggleButton(this.transport.isPlaying(), Color.GREEN_FLASHING, Color.GREEN_LOW)
+
+    this.buttons[4][5] = new MovePlaybackButton(this.transport, this.transport.timeSignature(), -4, Color.AMBER_FULL, Color.AMBER_LOW)
+    this.buttons[5][5] = new MovePlaybackButton(this.transport, this.transport.timeSignature(), -1, Color.YELLOW_FULL, Color.YELLOW_LOW)
+    this.buttons[6][5] = new MovePlaybackButton(this.transport, this.transport.timeSignature(), 1, Color.YELLOW_FULL, Color.YELLOW_LOW)
+    this.buttons[7][5] = new MovePlaybackButton(this.transport, this.transport.timeSignature(), 4, Color.AMBER_FULL, Color.AMBER_LOW)
+    
+    this.buttons[4][6] = new GenericActionButton(this.app.zoomOut, Color.GREEN_FULL, Color.GREEN_LOW)
+    this.buttons[5][6] = new GenericActionButton(this.transport.addCueMarkerAtPlaybackPosition, Color.AMBER_FULL, Color.AMBER_LOW)
+    this.buttons[6][6] = new GenericActionButton(this.transport.continuePlayback ,Color.RED_FLASHING, Color.RED_LOW)
+    this.buttons[7][6] = new GenericActionButton(this.app.zoomIn ,Color.GREEN_FULL, Color.GREEN_LOW)
+
+    this.buttons[4][7] = new GenericActionButton(this.transport.jumpToPreviousCueMarker, Color.AMBER_FULL, Color.AMBER_LOW)
+    this.buttons[5][7] = new GenericToggleButton(this.transport.isPlaying(), Color.GREEN_FULL, Color.GREEN_LOW)
     this.buttons[6][7] = new GenericToggleButton(this.transport.isArrangerRecordEnabled() ,Color.RED_FLASHING, Color.RED_LOW)
-    this.buttons[7][6] = new GenericToggleButton(this.transport.isArrangerAutomationWriteEnabled() ,Color.ORANGE_FLASHING, Color.YELLOW_LOW)
-    this.buttons[6][6] = new GenericToggleButton(this.transport.isArrangerOverdubEnabled() ,Color.ORANGE_FLASHING, Color.AMBER_LOW)
+    this.buttons[7][7] = new GenericActionButton(this.transport.jumpToNextCueMarker ,Color.AMBER_FULL, Color.AMBER_LOW)
+
+    this.buttons[8][6] = new GenericToggleButton(this.transport.isArrangerOverdubEnabled() ,Color.RED_FULL, Color.RED_LOW)
+    this.buttons[8][7] = new GenericToggleButton(this.transport.isArrangerAutomationWriteEnabled() ,Color.AMBER_FULL, Color.AMBER_LOW)
 
   }
 }

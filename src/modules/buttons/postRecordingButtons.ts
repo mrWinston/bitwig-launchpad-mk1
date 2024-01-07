@@ -1,4 +1,4 @@
-import { Color } from "../utils";
+import { calculateQuarterNotesPerBar, Color } from "../utils";
 import { Button } from "./button";
 
 
@@ -59,11 +59,3 @@ export class GenericSetBeatTimeValueButton extends Button {
 
 }
 
-function calculateQuarterNotesPerBar(timeSignature: string): number {
-  let [numString, denomString] = timeSignature.split("/")
-
-  let numerator: number = Number.parseInt(numString)
-  let denominator: number = Number.parseInt(denomString)
-
-  return numerator * 4 / denominator
-}

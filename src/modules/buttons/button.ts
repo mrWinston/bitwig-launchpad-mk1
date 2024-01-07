@@ -182,13 +182,13 @@ export class GenericMomentaryButton extends Button {
 }
 
 export class GenericIncreaseDecreaseButton extends Button {
-  parameter: API.Parameter
+  parameter: API.SettableRangedValue
   onColor: Color
   offColor: Color
 
   increment: number
 
-  constructor(parameter: API.Parameter, increment: number, onColor: Color, offColor: Color) {
+  constructor(parameter: API.SettableRangedValue, increment: number, onColor: Color, offColor: Color) {
     super()
     this.parameter = parameter
     this.parameter.markInterested()

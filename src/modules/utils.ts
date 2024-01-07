@@ -94,3 +94,12 @@ export function MatrixFilter<T>(matrix: T[][], fn: (value: T, col: number, row: 
   }
   return out
 }
+
+export function calculateQuarterNotesPerBar(timeSignature: string): number {
+  let [numString, denomString] = timeSignature.split("/")
+
+  let numerator: number = Number.parseInt(numString)
+  let denominator: number = Number.parseInt(denomString)
+
+  return numerator * 4 / denominator
+}
